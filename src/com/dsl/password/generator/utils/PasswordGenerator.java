@@ -19,11 +19,11 @@ public class PasswordGenerator implements Generator
 
     private Random random = new Random();
 
-    private List<String> alphabets = generateAlphabets();
+    private List<String> alphabet = generateAlphabet();
     private List<String> numeric = generateNumbers();
     private List<String> symbols = getSymbols();
 
-    private int alphabeticCount = 0;
+    private int alphabetCount = 0;
     private int numericCount = 0;
     private int symbolCount = 0;
 
@@ -37,18 +37,18 @@ public class PasswordGenerator implements Generator
     {
         switch (validType(type))
         {
-            case ALPHABETIC:
-                alphabeticCount++;
+            case ALPHABET:
+                alphabetCount++;
                 numericCount = 0;
                 symbolCount = 0;
-                return format(alphabets.get(indexAt(alphabets.size())));
+                return format(alphabet.get(indexAt(alphabet.size())));
             case NUMERIC:
-                alphabeticCount=0;
+                alphabetCount =0;
                 numericCount++;
                 symbolCount=0;
                 return numeric.get(indexAt(numeric.size()));
             case SYMBOL:
-                alphabeticCount=0;
+                alphabetCount =0;
                 numericCount=0;
                 symbolCount++;
                 return symbols.get(indexAt(symbols.size()));
@@ -74,7 +74,7 @@ public class PasswordGenerator implements Generator
 
     private Integer getExceedLimitType()
     {
-        if(alphabeticCount == LIMIT_IN_A_ROW) return ALPHABETIC;
+        if(alphabetCount == LIMIT_IN_A_ROW) return ALPHABET;
         if(numericCount == LIMIT_IN_A_ROW) return NUMERIC;
         if(symbolCount == LIMIT_IN_A_ROW) return SYMBOL;
         return null;

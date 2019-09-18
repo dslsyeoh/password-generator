@@ -19,7 +19,7 @@ public interface Generator
 
     String generatePassword(int length);
 
-    default List<String> generateAlphabets()
+    default List<String> generateAlphabet()
     {
         return IntStream.range('a', 'z').mapToObj(value -> (char)value).map(String::valueOf).collect(Collectors.toList());
     }
