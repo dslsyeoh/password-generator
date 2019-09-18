@@ -21,7 +21,7 @@ public class PasswordGenerator implements Generator
 
     private List<String> alphabet = generateAlphabet();
     private List<String> numeric = generateNumbers();
-    private List<String> symbols = getSymbols();
+    private List<String> symbols = generateSymbols();
 
     private int alphabetCount = 0;
     private int numericCount = 0;

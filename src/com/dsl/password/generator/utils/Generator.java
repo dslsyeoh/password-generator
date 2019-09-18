@@ -29,7 +29,7 @@ public interface Generator
         return IntStream.rangeClosed(0, 9).mapToObj(String::valueOf).collect(Collectors.toList());
     }
 
-    default List<String> getSymbols()
+    default List<String> generateSymbols()
     {
         return Arrays.asList("[", "]", "@", "?", "<", ">", "$", "#", "!", "&", "%", "+", "-");
     }
