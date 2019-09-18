@@ -6,6 +6,7 @@
 package com.dsl.password.generator.utils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -14,11 +15,17 @@ import static com.dsl.password.generator.constants.Type.*;
 
 public class PasswordGenerator implements Generator
 {
+    private static final int LIMIT_IN_A_ROW = 3;
+
     private Random random = new Random();
 
     private List<String> alphabets = generateAlphabets();
     private List<String> numeric = generateNumbers();
     private List<String> symbols = getSymbols();
+
+    private int alphabeticCount = 0;
+    private int numericCount = 0;
+    private int symbolCount = 0;
 
     @Override
     public String generatePassword(int length)
@@ -28,17 +35,49 @@ public class PasswordGenerator implements Generator
 
     private String next(int type)
     {
-        switch (type)
+        switch (validType(type))
         {
             case ALPHABETIC:
+                alphabeticCount++;
+                numericCount = 0;
+                symbolCount = 0;
                 return format(alphabets.get(indexAt(alphabets.size())));
             case NUMERIC:
+                alphabeticCount=0;
+                numericCount++;
+                symbolCount=0;
                 return numeric.get(indexAt(numeric.size()));
             case SYMBOL:
+                alphabeticCount=0;
+                numericCount=0;
+                symbolCount++;
                 return symbols.get(indexAt(symbols.size()));
             default:
                 return "";
         }
+    }
+
+    private int validType(int type)
+    {
+        Integer exceedLimitType = getExceedLimitType();
+        if(Objects.nonNull(exceedLimitType))
+        {
+            int newType = random.nextInt(3);
+            while(newType == exceedLimitType)
+            {
+                newType = random.nextInt(3);
+            }
+            return newType;
+        }
+        return type;
+    }
+
+    private Integer getExceedLimitType()
+    {
+        if(alphabeticCount == LIMIT_IN_A_ROW) return ALPHABETIC;
+        if(numericCount == LIMIT_IN_A_ROW) return NUMERIC;
+        if(symbolCount == LIMIT_IN_A_ROW) return SYMBOL;
+        return null;
     }
 
     private int indexAt(int size)
