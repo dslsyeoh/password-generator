@@ -3,7 +3,7 @@
  * Copyright (c) 2019. All rights reserved
  */
 
-package com.dsl.password.generator;
+package com.dsl.password.generator.utils;
 
 import java.util.Arrays;
 import java.util.List;
