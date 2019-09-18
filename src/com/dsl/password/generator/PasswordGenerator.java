@@ -5,8 +5,6 @@
 
 package com.dsl.password.generator;
 
-import javafx.beans.property.BooleanProperty;
-
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -21,9 +19,9 @@ public class PasswordGenerator implements Generator
     private List<String> symbols = getSymbols();
 
     @Override
-    public String generatePassword()
+    public String generatePassword(int length)
     {
-        return IntStream.range(0, 32).map(value -> random.nextInt(3)).mapToObj(this::next).collect(Collectors.joining());
+        return IntStream.range(0, length).map(value -> random.nextInt(3)).mapToObj(this::next).collect(Collectors.joining());
     }
 
     private String next(int type)

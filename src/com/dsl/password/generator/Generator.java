@@ -12,7 +12,12 @@ import java.util.stream.IntStream;
 
 public interface Generator
 {
-    String generatePassword();
+    default String generatePassword()
+    {
+        return generatePassword(32);
+    }
+
+    String generatePassword(int length);
 
     default List<String> generateAlphabets()
     {
