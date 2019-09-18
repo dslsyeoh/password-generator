@@ -17,7 +17,6 @@ public interface Generator
     default List<String> generateAlphabets()
     {
         return IntStream.range('a', 'z').mapToObj(value -> (char)value).map(String::valueOf).collect(Collectors.toList());
-
     }
 
     default List<String> generateNumbers()
